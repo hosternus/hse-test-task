@@ -1,4 +1,10 @@
 from random import randint
+from time import strftime
+
+from sqlalchemy import func  
+
+from db.models import LastAction
+from db.core import Session
 
 def jaccard_index(str1: str, str2: str) -> float:
     a = set(str1.lower().split())
@@ -9,7 +15,14 @@ def jaccard_index(str1: str, str2: str) -> float:
     return ans if ans else (randint(1,9) / randint(1,9))/1000
 
 def addUserLastAction(userId: int, action: str):
-    pass
+    action = LastAction(userId=userId, actionName=action, date=strftime('%Y:%m:%d %H:%M:%S'))
+    session = Session()
+    session.add(action)
+    session.commit()
+    session.close()
 
 def getNumberOfUsers() -> int:
-    return 0
+    session = Session()
+    users = session.query(func.count(func.distinct(LastAction.userId))).scalar()
+    session.close()
+    return users
