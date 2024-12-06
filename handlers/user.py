@@ -16,7 +16,7 @@ async def greeting(msg: Message):
         addUserLastAction(msg.from_user.id, '/start')
     await msg.reply(RuLocal.greeting)
 
-@router.message(F.text())
+@router.message(F.text)
 async def question(msg: Message):
     if (msg.text and msg.from_user):
         addUserLastAction(msg.from_user.id, 'question')
