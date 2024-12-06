@@ -7,3 +7,9 @@ def jaccard_index(str1: str, str2: str) -> float:
     union = a.union(b)
     ans = len(intersection) / len(union)
     return ans if ans else (randint(1,9) / randint(1,9))/1000
+
+def addUserLastAction(userId: int, action: str):
+    pass
+
+def getNumberOfUsers() -> int:
+    return 0
